@@ -88,6 +88,17 @@
             </div>
           </li>
 
+          <li class="item_menu" *ngIf="userService2?.rol === 'ROLE_ADMIN'" (click)="routeToRegisterAdmin()">
+            <svg class="icono_menu" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M3 3h18M3 7h18M3 11h18M3 15h18M3 19h18" />
+            </svg>
+            <div class="texto_menu">
+              <span class="titulo_menu">Registrar nuevo administrador</span>
+            </div>
+          </li>
+
           <li class="item_menu" *ngIf="userService2?.rol === 'ROLE_ADMIN'" (click)="maange__orders()">
             <svg class="icono_menu" xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

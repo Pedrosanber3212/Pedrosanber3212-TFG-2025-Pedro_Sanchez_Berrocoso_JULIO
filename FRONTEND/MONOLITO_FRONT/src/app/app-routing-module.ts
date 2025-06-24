@@ -24,6 +24,7 @@ import {
 import {
   AdminShowAllProductCategoriesPage
 } from './components/productCategories/admin-show-all-product-categories-page/admin-show-all-product-categories-page';
+import {AdminRegisterAdminForm} from './components/users/admin-register-admin-form/admin-register-admin-form';
 
 const routes: Routes = [
   { path: '', redirectTo: 'customer_show_all_products_page', pathMatch: 'full' },
@@ -45,6 +46,7 @@ const routes: Routes = [
 
   { path: 'admin/create_productCategories', component: AdminProductCategoriesCreateForm },
   { path: 'admin/show_all_productCategories', component: AdminShowAllProductCategoriesPage },
+  { path: 'admin/register_new_admin', component: AdminRegisterAdminForm },
 
 
 ];

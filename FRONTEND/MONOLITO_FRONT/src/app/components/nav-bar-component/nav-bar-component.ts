@@ -158,6 +158,11 @@ export class NavBarComponent implements OnInit {
 
   }
 
+  routeToRegisterAdmin(){
+    this.router.navigate(["/admin/register_new_admin"])
+
+  }
+
   maange__orders() {
     this.router.navigate(["/admin/show_all_orders_page"])
   }

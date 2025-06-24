@@ -49,9 +49,11 @@ import { AdminShowAllProductCategoriesPage } from './components/productCategorie
 import {
   AdminProductCategoriesModifyForm
 } from './components/productCategories/admin-product-categories-modify-form/admin-product-categories-modify-form';
+import { AdminRegisterAdminForm } from './components/users/admin-register-admin-form/admin-register-admin-form';
 
 @NgModule({
   declarations: [
+    AdminRegisterAdminForm,
     AdminProductCategoriesModifyForm,
     App,
     NavBarComponent,
@@ -68,6 +70,7 @@ import {
     ShowMyShoppingCartPage,
     AdminProductCategoriesCreateForm,
     AdminShowAllProductCategoriesPage,
+    AdminRegisterAdminForm,
   ],
   imports: [
     MatSliderModule,

@@ -33,6 +33,17 @@ export class UserService {
     )
   }
 
+  register_new_admin(userRegisterRequestDto: UserRegisterRequestDto): Observable<HttpResponse<any>> {
+    return this.http.post(
+      this.baseUrl + '/api/v1/users/register_admin',
+      userRegisterRequestDto,
+      {
+        withCredentials: true,
+        observe: 'response'
+      }
+    )
+  }
+
   login(username: string, password: string): Observable<HttpResponse<any>> {
 
     return this.http.post(

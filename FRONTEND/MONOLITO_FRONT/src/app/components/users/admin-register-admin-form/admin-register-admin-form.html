@@ -1,0 +1,69 @@
+<div class="loginCont">
+  <div class="contLoginBackg">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off" class="simpForm">
+      <div class="contLogoInicio">
+        <div class="ctImgSession">
+          <img class="logo" src="https://productimagesbuckett.s3.eu-west-1.amazonaws.com/primeShopLoginS3+(3)" />
+        </div>
+      </div>
+
+      <label for="name">Nombre <span class="REQUIRE">*</span></label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        placeholder="Nombre"
+        class="styledInput"
+      />
+
+      <label for="username">Nombre de Usuario <span class="REQUIRE">*</span></label>
+      <input
+        type="text"
+        id="username"
+        formControlName="username"
+        placeholder="Nombre de Usuario"
+        class="styledInput"
+      />
+
+      <label for="email">Email <span class="REQUIRE">*</span></label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        placeholder="Email"
+        class="styledInput"
+      />
+
+      <label for="address">Dirección <span class="REQUIRE">*</span></label>
+      <input
+        type="text"
+        id="address"
+        formControlName="address"
+        placeholder="Dirección"
+        class="styledInput"
+      />
+
+      <label for="birthdate">Cumpleaños <span class="REQUIRE">*</span></label>
+      <input
+        type="date"
+        id="birthdate"
+        formControlName="birthdate"
+        class="styledInput"
+      />
+
+      <label for="password">Contraseña <span class="REQUIRE">*</span></label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="Contraseña"
+        class="styledInput"
+      />
+
+      <button type="submit" class="btnSb">Registrar nuevo usuario administrador
+      </button>
+
+
+    </form>
+  </div>
+</div>
