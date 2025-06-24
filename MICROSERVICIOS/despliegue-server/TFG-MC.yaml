@@ -1,0 +1,410 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+
+---
+# ConfigMap para variables comunes (no sensibles)-----------------------------------
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: default
+data:
+  SPRING_APP_NAME: MONOLITO_BACKEND
+  DB_URL: jdbc:postgresql://postgres-service:5432/tfg_monolito
+
+  URL_MC_USERS: http://users-service
+  URL_MC_PRODUCTS: http://products-service
+  URL_MC_ORDERS: http://orders-service
+  URL_MC_CART: http://carts-service
+
+
+---
+# Secret para datos sensibles
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secrets
+  namespace: default
+type: Opaque
+stringData:
+  DB_USERNAME: pedro
+  DB_PASSWORD: pedro
+  S3_ACCESS_KEY: minioadmin
+  S3_SECRET_KEY: minioadmin
+
+---
+# Postgres DB----------------------------------------------------postgres--------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: tfg_monolito
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DB_USERNAME
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DB_PASSWORD
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: postgres
+
+---
+# Microservicios (1 de los 5)-------------------------------------------users-----------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+        - name: users
+          image: pedro3212/users-mc:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-service
+spec:
+  selector:
+    app: users
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+
+---
+# Microservicios (2 de los 5)-----------------------------------------products-------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: products
+  template:
+    metadata:
+      labels:
+        app: products
+    spec:
+      containers:
+        - name: products
+          image: pedro3212/products-mc:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-service
+spec:
+  selector:
+    app: products
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8081
+
+---
+# Microservicios (3 de los 5)------------------------------------------carts------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carts
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: carts
+  template:
+    metadata:
+      labels:
+        app: carts
+    spec:
+      containers:
+        - name: carts
+          image: pedro3212/carts-mc:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8082
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: carts-service
+spec:
+  selector:
+    app: carts
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8082
+
+---
+# Microservicios (4 de los 5)----------------------------------orders------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders
+  template:
+    metadata:
+      labels:
+        app: orders
+    spec:
+      containers:
+        - name: orders
+          image: pedro3212/orders-mc:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8083
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-service
+spec:
+  selector:
+    app: orders
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8083
+
+
+---
+# Microservicios (5 de los 5)----------------------------------filestorage------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filestorage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: filestorage
+  template:
+    metadata:
+      labels:
+        app: filestorage
+    spec:
+      containers:
+        - name: orders
+          image: pedro3212/filestorage-mc:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8084
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: filestorage-service
+spec:
+  selector:
+    app: filestorage
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8084
+
+---
+# NGINX Ingress Controller sin auth
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: public-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:4200"
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: tls-secret
+  rules:
+    - http:
+        paths:
+          - path: /login
+            pathType: Prefix
+            backend:
+              service:
+                name: users-service
+                port:
+                  number: 80
+          - path: /api/v1/users/register
+            pathType: Prefix
+            backend:
+              service:
+                name: users-service
+                port:
+                  number: 80
+          - path: /api/v1/users/register_admin
+            pathType: Prefix
+            backend:
+              service:
+                name: users-service
+                port:
+                  number: 80
+          - path: /logout
+            pathType: Prefix
+            backend:
+              service:
+                name: users-service
+                port:
+                  number: 80
+          - path: /api/v1/products/page
+            pathType: Prefix
+            backend:
+              service:
+                name: products-service
+                port:
+                  number: 80
+          - path: /api/v1/productcategories
+            pathType: Prefix
+            backend:
+              service:
+                name: products-service
+                port:
+                  number: 80
+
+---
+# NGINX Ingress Controller con validación de autenticación usando /api/v1/users/me3
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: protected-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/auth-url: "http://users-service.default.svc.cluster.local/api/v1/users/me3"
+    nginx.ingress.kubernetes.io/auth-response-headers: "Authorization, Set-Cookie"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:4200"
+spec:
+  ingressClassName: nginx
+  tls:
+    - secretName: tls-secret
+  rules:
+    - http:
+        paths:
+          - path: /api/v1/users
+            pathType: Prefix
+            backend:
+              service:
+                name: users-service
+                port:
+                  number: 80
+          - path: /api/v1/products
+            pathType: Prefix
+            backend:
+              service:
+                name: products-service
+                port:
+                  number: 80
+          - path: /api/v1/shoppingCart
+            pathType: Prefix
+            backend:
+              service:
+                name: carts-service
+                port:
+                  number: 80
+          - path: /api/v1/orders
+            pathType: Prefix
+            backend:
+              service:
+                name: orders-service
+                port:
+                  number: 80
+          - path: /api/v1/fileStorage
+            pathType: Prefix
+            backend:
+              service:
+                name: filestorage-service
+                port:
+                  number: 80

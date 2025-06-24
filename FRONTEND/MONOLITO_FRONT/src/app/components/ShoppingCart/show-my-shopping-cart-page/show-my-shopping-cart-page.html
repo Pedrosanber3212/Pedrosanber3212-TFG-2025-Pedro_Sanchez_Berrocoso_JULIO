@@ -1,0 +1,48 @@
+<mat-spinner *ngIf="isLoading" style="margin: auto; display: block;"></mat-spinner>
+
+<div class="cartContainer" *ngIf="userService.userStatus && !!shoppingCartItemDtoList && shoppingCartItemDtoList.length > 0 && !isLoading">
+  <div class="cartHeader">
+    <span>Producto</span>
+    <span>Precio</span>
+    <span>Cantidad</span>
+    <span class="actionsHeader">Acciones</span>
+  </div>
+
+  <div class="cartScroll">
+    <div class="cartR0w" *ngFor="let item of shoppingCartItemDtoList">
+      <div class="cartProduct">
+        <img [src]="item.image" alt="{{ item.name }}" />
+        <span>{{ item.name }}</span>
+      </div>
+      <div class="cartPrice">{{ item.price }} €</div>
+      <div class="cart-quantity">{{ item.quantity }}</div>
+      <div class="cartActions">
+        <button (click)="addToCart(item.productUUID)">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button (click)="deleteFromCart(item.uuid)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button mat-button class="createOrderButton" (click)="createOrder()">
+    <mat-icon>add</mat-icon> Tramitar pedido.
+  </button>
+</div>
+
+<!-- Mensaje si el carrito está vacío -->
+<div class="emptyCartSH" *ngIf="userService.userStatus && shoppingCartItemDtoList?.length === 0 && !isLoading">
+  <mat-icon class="emptyIcon">shopping_bag</mat-icon>
+  <p class="emptyTitle">Tu carrito está vacío</p>
+  <p class="emptySubt">Añade productos para comenzar tu pedido</p>
+</div>
+
+<!-- Mensaje si no está logueado -->
+<div class="emptyCartSH" *ngIf="!userService.userStatus">
+  <mat-icon class="emptyIcon">lock</mat-icon>
+  <p class="emptyTitle">Inicia sesión</p>
+  <p class="emptySubt">Debes acceder a tu cuenta para ver tu carrito</p>
+</div>
+

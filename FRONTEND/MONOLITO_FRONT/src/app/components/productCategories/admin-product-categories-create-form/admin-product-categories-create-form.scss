@@ -1,0 +1,63 @@
+.productCreateContainer {
+    margin-top: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4vh;
+  }
+
+  .productCreateForm {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 400px;
+    max-width: 90vw;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .formTITLE {
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #111;
+  }
+
+  .styledInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 15px;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .styledInput:focus {
+    outline: none;
+    border-color: #656565;
+    box-shadow: 0 0 0 2px rgba(71, 71, 71, 0.2);
+  }
+
+  .btnSb {
+    width: 100%;
+    height: 48px;
+    border-radius: 24px;
+    font-weight: bold;
+    background-color: #656565;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btnSb:hover {
+    background-color: #505050;
+  }
+
+  .REQUIRE {
+    color: red;
+    margin-left: 0.2rem;
+  }

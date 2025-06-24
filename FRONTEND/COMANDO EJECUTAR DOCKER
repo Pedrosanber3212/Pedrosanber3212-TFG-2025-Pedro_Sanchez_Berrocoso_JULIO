@@ -1,0 +1,7 @@
+docker build -t pedro3212/monolito-front .
+
+
+docker login
+
+
+docker push pedro3212/monolito-front

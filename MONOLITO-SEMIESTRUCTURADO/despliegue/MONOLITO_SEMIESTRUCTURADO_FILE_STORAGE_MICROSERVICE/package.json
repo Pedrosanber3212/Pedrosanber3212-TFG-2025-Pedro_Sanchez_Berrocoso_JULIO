@@ -1,0 +1,25 @@
+{
+  "name": "file-storage-microservice",
+  "version": "0.0.0",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node bin/www",
+    "development": "NODE_ENV=development node bin/www",
+    "production": "NODE_ENV=production node bin/www",
+    "localhost": "NODE_ENV=localhost node bin/www"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.826.0",
+    "@aws-sdk/credential-providers": "^3.826.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "multer": "^2.0.1",
+    "pug": "^2.0.4"
+  }
+
+}

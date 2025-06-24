@@ -1,0 +1,34 @@
+<div class="formContainer" *ngIf="showProductBoolean">
+  <form [formGroup]="form" (ngSubmit)="whenSubmitAndModifyProduct()" autocomplete="off">
+    <h1>Editar producto</h1>
+
+    <div class="formField_">
+      <label>Nombre del producto <span>*</span></label>
+      <input type="text" formControlName="name" placeholder="Nombre del producto" />
+    </div>
+
+    <div class="formField_">
+      <label>Descripción <span>*</span></label>
+      <input type="text" formControlName="description" placeholder="Descripción" />
+    </div>
+
+    <div class="formField_">
+      <label>Precio <span>*</span></label>
+      <input type="number" formControlName="price" placeholder="Precio" />
+    </div>
+
+    <div class="formField_">
+      <label>Stock <span>*</span></label>
+      <input type="number" formControlName="stock" placeholder="Stock" />
+    </div>
+
+    <div class="formField_">
+      <label>Categoría <span>*</span></label>
+      <select formControlName="categoryUUID">
+        <option *ngFor="let cat of ProductCategoryDtoList" [value]="cat.uuid">{{ cat.name }}</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Guardar cambios</button>
+  </form>
+</div>

@@ -1,0 +1,46 @@
+services:
+  postgresMS:
+    image: postgres:15
+    container_name: postgres_monoSemi
+    restart: always
+    env_file:
+      - ./env/postgresMS.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata2:/var/lib/postgresMS/data
+    networks:
+      - monolito-net2
+
+  monolitoMS:
+    image: pedro3212/monolito:latest
+    env_file:
+      - ./env/monolitoMS.env
+    container_name: monolitoMS
+    restart: always
+    depends_on:
+      - postgresMS
+      - filestorageMS
+    ports:
+      - "8050:8080"
+    env_file:
+      - ./env/monolitoM.env
+    networks:
+      - monolito-net2
+
+  filestorageMS:
+    image: pedro3212/filestorage:latest
+    container_name: filestorageMS
+    env_file:
+      - ./env/filestorageMS.env
+    ports:
+      - "8085:8085"
+    networks:
+      - monolito-net2
+
+volumes:
+  pgdata2:
+
+networks:
+  monolito-net2:
+    driver: bridge

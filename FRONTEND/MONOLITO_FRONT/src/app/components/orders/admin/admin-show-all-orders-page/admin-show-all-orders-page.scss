@@ -1,0 +1,90 @@
+.contenedor_manage_orders {
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f5f5f7;
+  height: 100vh;
+}
+
+.orderHeaders {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #1d1d1f;
+  }
+}
+
+.styled-order-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  table-layout: fixed;
+
+  th, td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eaeaea;
+    color: #333;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .status-select {
+    width: 150px;
+  }
+
+  .lista_productos_interior {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+
+      .product-thumb {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+    }
+  }
+}
+.custom-select {
+  appearance: none;
+  background-color: #f5f5f7;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1d1d1f;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+  width: 140px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+
+  &:hover {
+    border-color: #aaa;
+    background-color: #f0f0f0;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #007aff;
+    box-shadow: 0 0 0 2px rgba(0,122,255,0.2);
+  }
+}
+

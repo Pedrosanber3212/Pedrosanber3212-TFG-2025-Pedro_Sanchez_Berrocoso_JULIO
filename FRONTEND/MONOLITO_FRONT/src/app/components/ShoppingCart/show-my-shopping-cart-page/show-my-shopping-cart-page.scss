@@ -1,0 +1,148 @@
+.cartContainer {
+  max-width: 1000px;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.cartHeader {
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr 2fr;
+  font-weight: bold;
+  color: #1d1d1f;
+  padding: 10px 0;
+  border-bottom: 2px solid #eee;
+}
+
+.actionsHeader {
+  text-align: right;
+}
+
+.cartScroll {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #d6d6d6 transparent;
+}
+
+.cartScroll::-webkit-scrollbar {
+  width: 8px;
+}
+.cartScroll::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 10px;
+}
+
+.cartR0w {
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr 2fr;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.3s;
+
+  &:hover {
+    background-color: #fafafa;
+  }
+}
+
+.cartProduct {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  img {
+    height: 60px;
+    width: 60px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  span {
+    font-weight: 600;
+    color: #1d1d1f;
+  }
+}
+
+.cartPrice,
+.cart-quantity {
+  text-align: center;
+  font-weight: 500;
+}
+
+.cartActions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+
+  button {
+    background: linear-gradient(to right, #f0f0f0, #e0e0e0);
+    border: none;
+    border-radius: 20px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: #d4d4d4;
+    }
+
+    mat-icon {
+      color: #1d1d1f;
+    }
+  }
+}
+
+.createOrderButton {
+  width: 100%;
+  background-color: #ff3b30;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 999px;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  mat-icon {
+    margin-right: 8px;
+  }
+
+  &:hover {
+    background-color: #e12b28;
+  }
+}
+
+.emptyCartSH {
+  text-align: center;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  margin: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+  .emptyIcon {
+    font-size: 60px;
+    color: #86868b;
+    margin-bottom: 15px;
+  }
+
+  .emptyTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-bottom: 8px;
+  }
+
+  .emptySubt {
+    font-size: 1rem;
+    color: #6e6e73;
+  }
+}
+

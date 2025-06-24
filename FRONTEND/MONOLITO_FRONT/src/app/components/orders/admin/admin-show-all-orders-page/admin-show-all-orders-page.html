@@ -1,0 +1,42 @@
+<div class="contenedor_manage_orders">
+  <div class="orderHeaders">
+    <h2>Gestión de órdenes</h2>
+  </div>
+
+  <div style="overflow-y: auto; max-height: 85vh;">
+    <table class="styled-order-table">
+      <thead>
+        <tr>
+          <th>ID Orden</th>
+          <th>Estado</th>
+          <th>Total</th>
+          <th>Productos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of listOrderDto">
+          <td>{{ order.uuid }}</td>
+          <td>
+            <select class="custom-select" [(ngModel)]="order.status" (change)="statusChanged(order.uuid, $event)">
+              <option *ngFor="let status of orderStatus" [value]="status">{{ status }}</option>
+            </select>
+
+
+
+          </td>
+          <td>{{ order.totalPrice }} €</td>
+          <td>
+            <ul class="lista_productos_interior">
+              <li *ngFor="let item of order.items">
+                <img [src]="item.image" class="product-thumb" />
+                <span>{{ item.name }} ({{ item.quantity }} x {{ item.price }} €)</span>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

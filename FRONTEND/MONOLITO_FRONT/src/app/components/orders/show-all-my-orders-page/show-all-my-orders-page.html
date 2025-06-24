@@ -1,0 +1,43 @@
+<mat-spinner *ngIf="isLoading" style="margin: auto; display: block;"></mat-spinner>
+
+<div *ngIf="userService.userStatus && !isLoading" style="  background-color: #f5f5f7; height: 100vh;   overflow-y: auto; max-height: 100vh;
+">
+  <div *ngIf="listOrderDto && listOrderDto.length > 0; else noOrders" style=" height: 90vh;   overflow-y: auto; max-height: 90vh; padding: 10px;">
+    <div *ngFor="let customOrderDto of listOrderDto" class="orderSection">
+      <div class="orderHeaders">
+        <div><strong>Orden:</strong> {{ customOrderDto.uuid }}</div>
+        <div class="status" [ngClass]="customOrderDto.status">Estado: {{ customOrderDto.status }}</div>
+        <div><strong>Total:</strong> {{ customOrderDto.totalPrice }} €</div>
+      </div>
+
+      <table class="orderTable">
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of customOrderDto.items">
+            <td><img [src]="item.image" class="imageProduct" alt="{{ item.name }}" /></td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }} €</td>
+            <td>{{ item.quantity }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #noOrders>
+  <div class="emptyMessage">
+    <p>🛒 No tiene órdenes de compra aún.</p>
+  </div>
+</ng-template>
+
+<div class="emptyMessage" *ngIf="!userService.userStatus">
+  <p>Inicie sesión para visualizar sus órdenes de compra.</p>
+</div>

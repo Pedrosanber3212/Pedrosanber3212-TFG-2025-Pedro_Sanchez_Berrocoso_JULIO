@@ -1,0 +1,61 @@
+/* Import Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Estilos base para html y body */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  color: #242424;
+}
+
+/* Reset general */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Estilos para enlaces */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Estilos para listas */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Estilo para botones */
+button {
+  font-family: 'Poppins', serif;
+}
+
+
+
+.custom-modal-class .mat-mdc-dialog-surface {
+  border-radius: 0.5rem !important;
+  background-color: white !important;
+}
+
+
+.custom-swal-popup {
+  border-radius: 16px !important;
+}
+
+.custom-swal-confirm-button {
+  background-color: #7f7f7f !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: 600 !important;
+  font-size: 14px;
+  cursor: pointer;
+}
+

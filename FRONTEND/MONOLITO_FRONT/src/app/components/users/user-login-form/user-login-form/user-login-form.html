@@ -1,0 +1,25 @@
+<div class="loginCont">
+  <div class="contLoginBackg">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off" class="simpForm">
+      <div class="contLogoInicio">
+        <div class="ctImgSession">
+          <img class="logo" src="https://productimagesbuckett.s3.eu-west-1.amazonaws.com/primeShopLoginS3+(3)">
+        </div>
+      </div>
+
+      <label for="username">Correo electrónico <span class="REQUIRE">*</span></label>
+      <input type="email"id="username" formControlName="username" placeholder="Email" class="styledInput"/>
+
+      <label for="password">Contraseña <span class="REQUIRE">*</span></label>
+      <input  type="password" id="password" formControlName="password" placeholder="Contraseña" class="styledInput"
+      />
+
+      <button type="submit" class="btnSb">Iniciar sesión</button>
+
+      <div class="registerPrompt">
+        ¿No tiene una cuenta?
+        <a [routerLink]="['/user_register_form']" class="regLink">Registrarte ahora</a>
+      </div>
+    </form>
+  </div>
+</div>

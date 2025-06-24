@@ -1,0 +1,106 @@
+/* .auth-container {
+  text-align: center;
+  font-family: 'Segoe UI', 'Roboto', 'ECI-TEXT', sans-serif;
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-message {
+  font-size: 1.4rem;
+  color: #242424;
+  margin-bottom: 1rem;
+}
+
+.links-user-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.items-list button {
+  font-size: 1rem;
+  padding: 10px 20px;
+}
+
+.auth-links {
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.auth-links li {
+  list-style: none;
+  margin: 0.8rem 0;
+}
+
+.auth-links a {
+  font-size: 1.1rem;
+  color: #008C2E;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+ */
+
+ .modal_usuario_custom {
+  width: 280px;
+  padding: 12px 0;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0px 10px 24px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.menu_opciones {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item_menu {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  .icono_menu {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.8rem;
+    stroke: #555;
+  }
+
+  .texto_menu {
+    display: flex;
+    flex-direction: column;
+
+    .titulo_menu {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .susbt_menu {
+      font-size: 0.85rem;
+      color: #888;
+    }
+  }
+}
+
+.menu_divisor {
+  height: 1px;
+  margin: 0.4rem 1rem;
+  background-color: #e4e4e4;
+}
+
+.logout .titulo_menu {
+  color: #d32f2f;
+}

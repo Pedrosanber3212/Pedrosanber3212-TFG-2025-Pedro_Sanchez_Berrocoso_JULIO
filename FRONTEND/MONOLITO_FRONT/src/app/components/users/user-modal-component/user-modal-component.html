@@ -1,0 +1,129 @@
+<!-- SI ESTÁ LOGUEADO
+<div class="auth-container"  *ngIf="userService2?.userStatus && !isLoading && userService2?.rol === 'ROLE_ADMIN'" >
+  <p class="auth-message">Bienvenido, estás logueado[admin]</p>
+  <div class="links-user-modal">
+    <div class="items-list">
+      <button mat-raised-button color="primary" (click)="modifyAccount()">Modificar cuenta</button>
+    </div>
+    <div class="items-list">
+      <button mat-raised-button color="primary" (click)="manageAdminProducts()">Gestionar productos</button>
+    </div>
+    <div class="items-list">
+      <button mat-raised-button color="primary" (click)="manageAdminProducts()">Gestionar Categorías de productos</button>
+    </div>
+    <div class="items-list">
+      <button mat-raised-button color="primary" (click)="managePurchaseOrders()">Gestionar ordenes de compra</button>
+    </div>
+    <div class="items-list">
+      <button mat-raised-button color="warn" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </div>
+</div>
+<div class="auth-container"  *ngIf="userService2?.userStatus && !isLoading && userService2?.rol === 'ROLE_CUSTOMER'" >
+  <p class="auth-message">Bienvenido, estás logueado[customer]</p>
+  <div class="links-user-modal">
+    <div class="items-list">
+      <button mat-raised-button color="primary" (click)="modifyAccount()">Modificar cuenta</button>
+    </div>
+    <div class="items-list">
+      <button mat-raised-button color="primary" (click)="customerlinkToMyOrders()">Estado ordenes de compra</button>
+    </div>
+    <div class="items-list">
+      <button mat-raised-button color="warn" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </div>
+</div>
+
+<div class="auth-container" *ngIf="!userService2?.userStatus && !isLoading" >
+  <p class="auth-message">El usuario no está logueado</p>
+  <ul class="auth-links">
+    <li><a routerLink="user_login_form" (click)="closeMatDialog()">Iniciar sesión</a></li>
+    <li><a routerLink="user_register_form" (click)="closeMatDialog()">Registrarse</a></li>
+  </ul>
+</div>
+
+
+<div class="auth-container" *ngIf="isLoading">
+
+  <mat-spinner diameter="40"></mat-spinner>
+  <p>Cargando ...</p>
+</div> -->
+
+
+<div class="modal_usuario_custom">
+  <ul class="menu_opciones">
+
+    <li class="item_menu" (click)="modifyAccount()">
+      <svg class="icono_menu" xmlns="http://www.w3.org/2000/svg" fill="none"
+           viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0H4.5z" />
+      </svg>
+      <div class="texto_menu">
+        <span class="titulo_menu">Perfil</span>
+<!--         <span class="menu-subtitle">{{ userService2?.user?.email }}</span>
+ -->        <span class="susbt_menu"></span>
+
+      </div>
+    </li>
+
+    <li class="item_menu" *ngIf="userService2?.rol === 'ROLE_ADMIN'" (click)="manageAdminProducts()">
+      <svg class="icono_menu" xmlns="http://www.w3.org/2000/svg" fill="none"
+           viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M3 3h18M3 7h18M3 11h18M3 15h18M3 19h18" />
+      </svg>
+      <div class="texto_menu">
+        <span class="titulo_menu">Gestionar productos</span>
+      </div>
+    </li>
+
+
+    <li class="item_menu" *ngIf="userService2?.rol === 'ROLE_ADMIN'" (click)="manageAdminProductsCategories()">
+      <svg class="icono_menu" xmlns="http://www.w3.org/2000/svg" fill="none"
+           viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M3 3h18M3 7h18M3 11h18M3 15h18M3 19h18" />
+      </svg>
+      <div class="texto_menu">
+        <span class="titulo_menu">Gestionar Categorías de productos</span>
+      </div>
+    </li>
+
+    <li class="item_menu" *ngIf="userService2?.rol === 'ROLE_ADMIN'" (click)="managePurchaseOrders()">
+      <svg class="icono_menu" xmlns="http://www.w3.org/2000/svg" fill="none"
+           viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 6v6l4 2m6 6H6a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v12z" />
+      </svg>
+      <div class="texto_menu">
+        <span class="titulo_menu">Ordenes de compra</span>
+      </div>
+    </li>
+
+    <li class="item_menu" *ngIf="userService2?.rol === 'ROLE_CUSTOMER'" (click)="customerlinkToMyOrders()">
+      <svg class="icono_menu" xmlns="http://www.w3.org/2000/svg" fill="none"
+           viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12" />
+      </svg>
+      <div class="texto_menu">
+        <span class="titulo_menu">Mis órdenes</span>
+      </div>
+    </li>
+
+    <li class="menu_divisor"></li>
+
+    <li class="item_menu logout" (click)="logout()">
+      <svg class="icono_menu" xmlns="http://www.w3.org/2000/svg" fill="none"
+           viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3-3H9.75m0 0l3-3m-3 3l3 3" />
+      </svg>
+      <span class="titulo_menu">Cerrar sesión</span>
+    </li>
+
+  </ul>
+</div>
+
+

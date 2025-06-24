@@ -1,0 +1,76 @@
+.FORMcontainer {
+    margin-top: 2vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+  }
+
+  .formClass {
+    padding: 0 2rem;
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .formTITLE {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    color: #111;
+    margin-bottom: 0.5rem;
+  }
+
+  label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.3rem;
+  }
+
+  .REQUIRE {
+    color: red;
+    margin-left: 0.2rem;
+  }
+
+  .styledInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #d0d0d0;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #8c8c8c;
+      box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+    }
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+
+  .btnSb {
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    font-weight: 600;
+    background-color: #8c8c8c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #494949;
+    }
+  }

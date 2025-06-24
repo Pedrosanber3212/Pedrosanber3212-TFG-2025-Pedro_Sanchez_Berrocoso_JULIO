@@ -1,0 +1,10 @@
+<div class="productCreateContainer">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="productCreateForm" autocomplete="off">
+      <h1 class="formTITLE">Crear nueva categoría</h1>
+
+      <label for="name">Nombre<span class="REQUIRE">*</span></label>
+      <input id="name" type="text" formControlName="name" placeholder="Nombre de la categoría" class="styledInput" />
+
+      <button type="submit" class="btnSb" [disabled]="form.invalid">Crear categoría</button>
+    </form>
+  </div>

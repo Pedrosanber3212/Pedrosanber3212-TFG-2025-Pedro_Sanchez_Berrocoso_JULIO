@@ -1,0 +1,82 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sideNav" mode="side" close>
+    <h3 style="text-align: center;">Filtros</h3>
+
+    <div class="pageFilter">
+      <label>Precio mínimo: {{ minPriceSelected }}</label>
+      <mat-slider min="0" max="1000" step="10">
+        <input matSliderThumb [(ngModel)]="minPriceSelected" />
+      </mat-slider>
+    </div>
+
+    <div class="pageFilter">
+      <label>Precio máximo: {{ maxPriceSelected }}</label>
+      <mat-slider min="0" max="1000" step="10">
+        <input matSliderThumb [(ngModel)]="maxPriceSelected" />
+      </mat-slider>
+    </div>
+
+    <div class="pageFilter">
+      <label>Categoría:</label>
+      <mat-radio-group [(ngModel)]="categoryUUID">
+        <mat-radio-button *ngFor="let category of productCategoryList" [value]="category.uuid">
+          {{ category.name }}
+        </mat-radio-button>
+        <mat-radio-button [value]="null">All</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="pageFilter">
+      <label>Artículos por página:</label>
+      <mat-form-field appearance="fill">
+        <mat-select [(ngModel)]="sizeSelected">
+          <mat-option [value]="4">4</mat-option>
+          <mat-option [value]="8">8</mat-option>
+          <mat-option [value]="12">12</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" class="applyFiltersBTN" (click)="applyFilters()">Aplicar filtros</button>
+  </mat-drawer>
+
+  <button class="TGGL_BUTTON" (click)="drawer.toggle()">
+    <div class="FILTER_HEADER">
+      <button class="rountTgglBTN"><mat-icon>tune</mat-icon></button>
+    </div>
+  </button>
+
+  <div class="productList">
+    <mat-card *ngFor="let product of productList" class="productCard">
+      <img mat-card-image [src]="product.image" alt="{{ product.name }}" />
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <mat-card-subtitle>{{ product.price }}€</mat-card-subtitle>
+      <mat-card-content>
+        <p>{{ product.description.substring(0, 55) }}</p>
+        <p>Stock: {{ product.stock }}</p>
+      </mat-card-content>
+      <mat-card-actions *ngIf="userService?.userStatus ?? false">
+        <button mat-button color="accent" (click)="addToCart(product.uuid)">
+          Añadir al carrito <mat-icon>add_shopping_cart</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="PAGcontrols">
+    <button mat-icon-button [disabled]="pageSelected === 0" (click)="moveBackButton()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+
+    <button *ngFor="let page of visiblePagesArray"
+            [ngClass]="{ 'active': page === pageSelected }"
+            class="page-btn"
+            (click)="goToPage(page)">
+      {{ page + 1 }}
+    </button>
+
+    <button mat-icon-button [disabled]="!hasNextPageBoolean" (click)="moveForwardButton()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+</mat-drawer-container>

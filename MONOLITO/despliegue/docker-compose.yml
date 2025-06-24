@@ -1,0 +1,32 @@
+services:
+  postgresM:
+    image: postgres:15
+    container_name: postgres_monol
+    restart: always
+    env_file:
+      - ./env/postgresM.env
+    ports:
+      - "5430:5432"
+    volumes:
+      - pgdatamonol1:/var/lib/postgresql/data
+    networks:
+      - monolito-net1
+
+  monolitoM:
+    image: pedro3212/monolito_monol:latest
+    container_name: monolito_monol
+    depends_on:
+      - postgresM
+    ports:
+      - "8020:8080"
+    env_file:
+      - ./env/monolitoM.env
+    networks:
+      - monolito-net1
+
+volumes:
+  pgdatamonol1:
+
+networks:
+  monolito-net1:
+    driver: bridge

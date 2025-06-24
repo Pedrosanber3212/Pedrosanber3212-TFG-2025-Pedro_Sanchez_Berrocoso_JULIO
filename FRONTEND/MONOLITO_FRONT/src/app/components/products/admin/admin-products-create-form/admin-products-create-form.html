@@ -1,0 +1,28 @@
+<div class="productCreateContainer">
+  <form [formGroup]="form" (ngSubmit)="onSubmitAndCreateProduct()" class="productCreateForm" autocomplete="off">
+    <h1 class="formTITLE">Crear nuevo producto</h1>
+
+    <label for="name">Nombre del producto<span class="REQUIRE">*</span></label>
+    <input id="name" type="text" formControlName="name" placeholder="Nombre del producto" class="styledInput" />
+
+    <label for="description">Descripción<span class="REQUIRE">*</span></label>
+    <input id="description" type="text" formControlName="description" placeholder="Descripción" class="styledInput" />
+
+    <label for="price">Precio<span class="REQUIRE">*</span></label>
+    <input id="price" type="number" formControlName="price" placeholder="Precio" class="styledInput" />
+
+    <label for="stock">Stock<span class="REQUIRE">*</span></label>
+    <input id="stock" type="number" formControlName="stock" placeholder="Stock" class="styledInput" />
+
+    <label for="category">Categoría<span class="REQUIRE">*</span></label>
+    <select id="category" formControlName="categoryUUID" class="styledInput">
+      <option value="" disabled selected>Selecciona categoría</option>
+      <option *ngFor="let category of ProductCategoryDtoList" [value]="category.uuid">{{ category.name }}</option>
+    </select>
+
+    <label for="image">Seleccionar imagen:</label>
+    <input id="image" type="file" (change)="onFileSelected($event)" accept="image/*" class="styledInput" />
+
+    <button type="submit" class="btnSb">Crear producto</button>
+  </form>
+</div>

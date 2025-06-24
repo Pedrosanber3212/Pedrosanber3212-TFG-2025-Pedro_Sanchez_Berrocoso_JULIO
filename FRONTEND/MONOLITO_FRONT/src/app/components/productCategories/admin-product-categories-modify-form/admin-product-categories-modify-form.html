@@ -1,0 +1,12 @@
+<div class="formContainer" *ngIf="showCategoryBoolean">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+      <h1>Editar categoría</h1>
+
+      <div class="formField_">
+        <label>Nombre de la categoría <span>*</span></label>
+        <input type="text" formControlName="name" placeholder="Nombre de la categoría" />
+      </div>
+
+      <button type="submit" [disabled]="form.invalid">Guardar cambios</button>
+    </form>
+  </div>

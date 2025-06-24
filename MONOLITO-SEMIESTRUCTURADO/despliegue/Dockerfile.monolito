@@ -1,0 +1,9 @@
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+COPY MONOLITO_SEMIESTRUCUTRADO_MONOLITO/build/libs/MONOLITO_BACKEND-0.0.1-SNAPSHOT.jar monolito.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "monolito.jar"]

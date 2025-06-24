@@ -1,0 +1,11 @@
+FROM node:latest
+
+WORKDIR /app
+
+COPY MONOLITO_SEMIESTRUCTURADO_FILE_STORAGE_MICROSERVICE/ .
+
+RUN npm install
+
+EXPOSE 8085
+
+CMD ["node", "bin/www"]
